@@ -6,6 +6,7 @@ export default function MyInput({
   placeHolder,
   keyboardType,
   secureTextEntry,
+  onChangeText,
 }) {
   return (
     <TextInput
@@ -13,6 +14,7 @@ export default function MyInput({
       placeholder={placeHolder}
       keyboardType={keyboardType}
       secureTextEntry={secureTextEntry}
+      onChangeText={onChangeText}
     />
   );
 }
