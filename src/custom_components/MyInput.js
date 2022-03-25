@@ -1,30 +1,43 @@
 import React from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, TextInput, View, TouchableOpacity } from "react-native";
 import { theme } from "../myStyle";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import * as Animatable from "react-native-animatable";
+import Feather from "react-native-vector-icons/Feather";
 
-export default function MyInput({
-  placeHolder,
-  keyboardType,
-  secureTextEntry,
-  onChangeText,
-  iconName,
-}) {
+export default function MyInput(props) {
   return (
     <View style={styles.container}>
-      <FontAwesome
+      <Feather
         style={{ width: "8%", textAlign: "center" }}
-        name={iconName}
+        name={props.iconName}
         color={theme.colors.primary}
         size={24}
       />
       <TextInput
-        style={{ width: "92%", paddingStart: 8 }}
-        placeholder={placeHolder}
-        keyboardType={keyboardType}
-        secureTextEntry={secureTextEntry}
-        onChangeText={onChangeText}
+        style={{ width: "84%", paddingStart: 8 }}
+        placeholder={props.placeHolder}
+        keyboardType={props.keyboardType}
+        secureTextEntry={props.secureTextEntry}
+        onChangeText={props.onChangeText}
       />
+      {props.textInputChange ? (
+        <Animatable.View
+          style={{ width: "8%" }}
+          animation="fadeIn"
+          duration={300}
+        >
+          <Feather name="check-circle" color={theme.colors.primary} size={24} />
+        </Animatable.View>
+      ) : null}
+      {props.visibility ? (
+        <TouchableOpacity onPress={props.visibility}>
+          {props.secureTextEntry ? (
+            <Feather name="eye-off" color={theme.colors.primary} size={24} />
+          ) : (
+            <Feather name="eye" color={theme.colors.primary} size={24} />
+          )}
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 }

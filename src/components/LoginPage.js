@@ -1,18 +1,53 @@
 import * as React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import ButtonTransparent from "../custom_components/buttons/ButtonTransparent";
 import ButtonFilled from "../custom_components/buttons/ButtonFilled";
 import { theme, darkTheme } from "../myStyle";
 import MyInput from "../custom_components/MyInput";
 import * as Animatable from "react-native-animatable";
+import Feather from "react-native-vector-icons/Feather";
 
 import { AuthContext } from "./auth/context";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LoginPage({ navigation }) {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [data, setData] = React.useState({
+    email: "",
+    password: "",
+    check_textInputChange: false,
+    secureTextEntry: true,
+  });
+
+  const textInputChange = (val) => {
+    if (val.length != 0) {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: true,
+      });
+    } else {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: false,
+      });
+    }
+  };
+
+  const handlePasswordChange = (val) => {
+    setData({
+      ...data,
+      password: val,
+    });
+  };
+
+  const updateSecureTextEntry = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry,
+    });
+  };
 
   const signUp = () => {
     navigation.navigate("RegisterPage");
@@ -32,16 +67,20 @@ export default function LoginPage({ navigation }) {
           <MyInput
             placeHolder="Email"
             keyboardType="email-address"
-            onChangeText={setEmail}
-            iconName="envelope"
+            onChangeText={(val) => textInputChange(val)}
+            iconName="mail"
+            textInputChange={data.check_textInputChange}
           />
         </View>
-        <MyInput
-          placeHolder="Password"
-          secureTextEntry={true}
-          onChangeText={setPassword}
-          iconName="lock"
-        />
+        <View>
+          <MyInput
+            placeHolder="Password"
+            secureTextEntry={data.secureTextEntry ? true : false}
+            iconName="lock"
+            onChangeText={(val) => handlePasswordChange(val)}
+            visibility={updateSecureTextEntry}
+          />
+        </View>
         <Text
           style={{ textAlign: "right", padding: 8, color: "grey" }}
           //onPress={() => navigation.navigate("ForgetPasswordScreen")}
