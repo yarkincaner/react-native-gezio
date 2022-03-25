@@ -5,9 +5,10 @@ import ButtonTransparent from "../custom_components/buttons/ButtonTransparent";
 import ButtonFilled from "../custom_components/buttons/ButtonFilled";
 import { theme, darkTheme } from "../myStyle";
 import MyInput from "../custom_components/MyInput";
+import * as Animatable from "react-native-animatable";
 
 import { AuthContext } from "./auth/context";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LoginPage({ navigation }) {
   const [email, setEmail] = React.useState("");
@@ -20,33 +21,41 @@ export default function LoginPage({ navigation }) {
   const { login } = React.useContext(AuthContext);
 
   return (
-    <SafeAreaProvider>
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-        <Text style={styles.title}>Gezio</Text>
+    <SafeAreaView style={styles.container}>
+      <StatusBar style="auto" />
+      <Animatable.Text animation="pulse" duration={1500} style={styles.title}>
+        Gezio
+      </Animatable.Text>
 
-        <View style={styles.inputContainer}>
-          <View style={{ marginBottom: 8 }}>
-            <MyInput
-              placeHolder="Email"
-              keyboardType="email-address"
-              onChangeText={setEmail}
-            />
-          </View>
+      <View style={styles.inputContainer}>
+        <View style={{ marginBottom: 8 }}>
           <MyInput
-            placeHolder="Password"
-            secureTextEntry={true}
-            onChangeText={setPassword}
+            placeHolder="Email"
+            keyboardType="email-address"
+            onChangeText={setEmail}
+            iconName="envelope"
           />
         </View>
-
-        <View style={styles.buttonContainer}>
-          <ButtonTransparent onPress={login} title="login" />
-          <Text style={styles.text}>Or</Text>
-          <ButtonFilled onPress={signUp} title="sign up" />
-        </View>
+        <MyInput
+          placeHolder="Password"
+          secureTextEntry={true}
+          onChangeText={setPassword}
+          iconName="lock"
+        />
+        <Text
+          style={{ textAlign: "right", padding: 8, color: "grey" }}
+          //onPress={() => navigation.navigate("ForgetPasswordScreen")}
+        >
+          Forget Password? Click here
+        </Text>
       </View>
-    </SafeAreaProvider>
+
+      <View style={styles.buttonContainer}>
+        <ButtonTransparent onPress={login} title="login" />
+        <Text style={styles.text}>Or</Text>
+        <ButtonFilled onPress={signUp} title="sign up" />
+      </View>
+    </SafeAreaView>
   );
 }
 

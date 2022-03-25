@@ -26,7 +26,11 @@ const LandingPage = ({ navigation }) => (
       component={LoginPage}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="RegisterPage" component={RegisterPage} />
+    <Stack.Screen
+      name="RegisterPage"
+      component={RegisterPage}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
 );
 

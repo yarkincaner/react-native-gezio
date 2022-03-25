@@ -11,8 +11,7 @@ const ButtonTransparent = ({ onPress, title }) => (
 const styles = StyleSheet.create({
   appButtonContainer: {
     width: "100%",
-    elevation: 8,
-    backgroundColor: theme.colors.background,
+    backgroundColor: "transparent",
     borderRadius: 10,
     borderColor: theme.colors.primary,
     borderWidth: 1,
