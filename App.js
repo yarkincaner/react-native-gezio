@@ -3,12 +3,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import LandingPage from "./src/components/LandingPage";
-import RegisterPage from "./src/components/RegisterPage";
 import SplashScreen from "./src/components/SplashScreen";
+import HomePage from "./src/components/HomePage";
 
 import { AuthContext } from "./src/components/auth/context";
-import HomePage from "./src/components/HomePage";
-import LoginPage from "./src/components/LoginPage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +17,7 @@ export default function App() {
 
   const initialLoginState = {
     isLoading: true,
-    userName: null,
+    email: null,
     userToken: null,
   };
 
@@ -33,21 +32,21 @@ export default function App() {
       case "LOGIN":
         return {
           ...prevState,
-          userName: action.id,
+          email: action.id,
           userToken: action.token,
           isLoading: false,
         };
       case "LOGOUT":
         return {
           ...prevState,
-          userName: null,
+          email: null,
           userToken: null,
           isLoading: false,
         };
       case "REGISTER":
         return {
           ...prevState,
-          userName: action.id,
+          email: action.id,
           userToken: action.token,
           isLoading: false,
         };
@@ -61,20 +60,30 @@ export default function App() {
 
   const authContext = React.useMemo(
     () => ({
-      login: (userName, password) => {
+      login: async (email, password) => {
         // setUserToken("abcd");
         // setIsLoading(false);
         let userToken;
-        userName = null;
+        email = null;
         /**Later user, pass and abcd will be fetched from the database */
-        if (userName == "user" && password == "pass") {
+        if (email == "email" && password == "pass") {
           userToken = "abcd";
+          try {
+            await AsyncStorage.setItem("userToken", userToken);
+          } catch (error) {
+            console.log(error);
+          }
         }
-        dispatch({ type: "LOGIN", id: userName, token: userToken });
+        dispatch({ type: "LOGIN", id: email, token: userToken });
       },
-      signOut: () => {
+      signOut: async () => {
         // setUserToken(null);
         // setIsLoading(false);
+        try {
+          await AsyncStorage.removeItem("userToken");
+        } catch (error) {
+          console.log(error);
+        }
         dispatch({ type: "LOGOUT" });
       },
       signUp: () => {
@@ -86,9 +95,18 @@ export default function App() {
   );
 
   React.useEffect(() => {
-    setTimeout(() => {
+    setTimeout(async () => {
       //setIsLoading(false);
-      dispatch({ type: "RETREIVE_TOKEN", token: "abcd" });
+      let userToken;
+      userToken = null;
+
+      try {
+        userToken = await AsyncStorage.getItem("userToken");
+      } catch (error) {
+        console.log(error);
+      }
+
+      dispatch({ type: "RETREIVE_TOKEN", token: userToken });
     }, 1000);
   }, []);
 

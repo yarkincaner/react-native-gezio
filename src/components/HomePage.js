@@ -13,12 +13,7 @@ export default function HomePage({ navigation }) {
   return (
     <View>
       <Text>Home Page</Text>
-      <ButtonFilled
-        title="sign out"
-        onPress={() => {
-          signOut();
-        }}
-      />
+      <ButtonFilled title="sign out" onPress={signOut()} />
     </View>
   );
 }

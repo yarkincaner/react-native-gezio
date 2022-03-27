@@ -6,7 +6,6 @@ import ButtonFilled from "../custom_components/buttons/ButtonFilled";
 import { theme, darkTheme } from "../myStyle";
 import MyInput from "../custom_components/MyInput";
 import * as Animatable from "react-native-animatable";
-import Feather from "react-native-vector-icons/Feather";
 
 import { AuthContext } from "./auth/context";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -55,6 +54,11 @@ export default function LoginPage({ navigation }) {
 
   const { login } = React.useContext(AuthContext);
 
+  // Hata buradan kaynaklanıyo. loginhandle -> login -> App.js içerisindeki authContext içerisindeki login
+  const loginHandle = (email, password) => {
+    login(email, password);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -90,7 +94,10 @@ export default function LoginPage({ navigation }) {
       </View>
 
       <View style={styles.buttonContainer}>
-        <ButtonTransparent onPress={login} title="login" />
+        <ButtonTransparent
+          onPress={loginHandle(data.email, data.password)}
+          title="login"
+        />
         <Text style={styles.text}>Or</Text>
         <ButtonFilled onPress={signUp} title="sign up" />
       </View>
