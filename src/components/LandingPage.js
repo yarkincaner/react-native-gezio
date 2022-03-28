@@ -6,8 +6,6 @@ import ButtonTransparent from "../custom_components/buttons/ButtonTransparent";
 import ButtonFilled from "../custom_components/buttons/ButtonFilled";
 import { theme, darkTheme } from "../myStyle";
 import MyInput from "../custom_components/MyInput";
-
-import { AuthContext } from "./auth/context";
 import SplashScreen from "./SplashScreen";
 import LoginPage from "./LoginPage";
 import RegisterPage from "./RegisterPage";

@@ -6,15 +6,13 @@ import ButtonFilled from "../custom_components/buttons/ButtonFilled";
 import { theme, darkTheme } from "../myStyle";
 import MyInput from "../custom_components/MyInput";
 import * as Animatable from "react-native-animatable";
-import Feather from "react-native-vector-icons/Feather";
-
-import { AuthContext } from "./auth/context";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Context as AuthContext } from "./auth/AuthContext";
 
 export default function LoginPage({ navigation }) {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [data, setData] = React.useState({
-    email: "",
-    password: "",
     check_textInputChange: false,
     secureTextEntry: true,
   });
@@ -23,23 +21,23 @@ export default function LoginPage({ navigation }) {
     if (val.length != 0) {
       setData({
         ...data,
-        email: val,
         check_textInputChange: true,
       });
+      setEmail(val);
     } else {
       setData({
         ...data,
-        email: val,
         check_textInputChange: false,
       });
+      setEmail(val);
     }
   };
 
   const handlePasswordChange = (val) => {
     setData({
       ...data,
-      password: val,
     });
+    setPassword(val);
   };
 
   const updateSecureTextEntry = () => {
@@ -53,11 +51,11 @@ export default function LoginPage({ navigation }) {
     navigation.navigate("RegisterPage");
   };
 
-  const { login } = React.useContext(AuthContext);
+  const { state, login } = React.useContext(AuthContext);
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" backgroundColor={theme.colors.background} />
       <Animatable.Text animation="pulse" duration={1500} style={styles.title}>
         Gezio
       </Animatable.Text>
@@ -90,7 +88,10 @@ export default function LoginPage({ navigation }) {
       </View>
 
       <View style={styles.buttonContainer}>
-        <ButtonTransparent onPress={login} title="login" />
+        <ButtonTransparent
+          onPress={() => login({ email, password })}
+          title="login"
+        />
         <Text style={styles.text}>Or</Text>
         <ButtonFilled onPress={signUp} title="sign up" />
       </View>
