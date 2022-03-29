@@ -9,16 +9,24 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Provider as AuthProvider } from "./src/components/auth/AuthContext.js";
 import { Context as AuthContext } from "./src/components/auth/AuthContext";
+import { StatusBar } from "expo-status-bar";
+import { theme } from "./src/myStyle";
 
 const Stack = createNativeStackNavigator();
 
 function App() {
-  const { state } = React.useContext(AuthContext);
+  const { state, retreive_token } = React.useContext(AuthContext);
   console.log(state);
 
-  // if (loginState.isLoading) {
-  //   return <SplashScreen />;
-  // }
+  React.useEffect(() => {
+    setTimeout(() => {
+      retreive_token();
+    }, 1000);
+  }, []);
+
+  if (state.isLoading) {
+    return <SplashScreen />;
+  }
   return (
     <SafeAreaProvider>
       <NavigationContainer>

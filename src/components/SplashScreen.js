@@ -1,11 +1,21 @@
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
+import * as Animatable from "react-native-animatable";
 import { theme } from "../myStyle";
 
 export default function SplashScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Gezio</Text>
+      <StatusBar style="light" backgroundColor={theme.colors.primary} />
+      <Animatable.Text
+        style={styles.title}
+        animation="pulse"
+        duration={1500}
+        iterationCount="infinite"
+      >
+        Gezio
+      </Animatable.Text>
       <ActivityIndicator size="large" color={theme.colors.background} />
     </View>
   );
