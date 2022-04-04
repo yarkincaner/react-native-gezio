@@ -1,6 +1,6 @@
 import React from "react";
-import HomePage from "./pages/HomePage";
-import ProfilePage from "./pages/ProfilePage";
+import HomePage from "./pages/home/HomePage";
+import ProfilePage from "./pages/profile/ProfilePage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StatusBar } from "expo-status-bar";

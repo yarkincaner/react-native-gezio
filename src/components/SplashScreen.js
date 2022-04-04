@@ -11,12 +11,12 @@ export default function SplashScreen() {
       <Animatable.Text
         style={styles.title}
         animation="pulse"
-        duration={1500}
-        iterationCount="infinite"
+        // duration={1500}
+        iterationCount={"infinite"}
       >
         Gezio
       </Animatable.Text>
-      <ActivityIndicator size="large" color={theme.colors.background} />
+      {/* <ActivityIndicator size="large" color={theme.colors.background} /> */}
     </View>
   );
 }
