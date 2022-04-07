@@ -37,26 +37,30 @@ export default function MainScreen({ navigation }) {
           name="Home"
           component={HomePage}
           options={{
+            headerShown: false,
             tabBarStyle: {
               backgroundColor: theme.colors.background,
+              borderTopWidth: 0,
+              shadowOffset: { width: 5, height: 3 },
+              shadowColor: "black",
+              shadowOpacity: 0.5,
+              elevation: 5,
             },
-            headerStyle: {
-              backgroundColor: theme.colors.background,
-            },
-            headerTintColor: theme.colors.foreground,
           }}
         />
         <Tab.Screen
           name="Profile"
           component={ProfilePage}
           options={{
+            headerShown: false,
             tabBarStyle: {
               backgroundColor: theme.colors.background,
+              borderTopWidth: 0,
+              shadowOffset: { width: 5, height: 3 },
+              shadowColor: "black",
+              shadowOpacity: 0.5,
+              elevation: 5,
             },
-            headerStyle: {
-              backgroundColor: theme.colors.background,
-            },
-            headerTintColor: theme.colors.foreground,
           }}
         />
       </Tab.Navigator>

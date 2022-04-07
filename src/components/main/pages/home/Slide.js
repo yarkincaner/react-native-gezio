@@ -10,18 +10,18 @@ import {
 } from "react-native";
 import { theme } from "../../../../myStyle";
 
-const width = Dimensions.get("screen").width / 1.3;
+const width = Dimensions.get("screen").width / 1.5;
 
 export default function Slide(props) {
   return (
-    <View>
+    <View style={{ alignItems: "center" }}>
       <ImageBackground
-        source={{ uri: props.item.thumbnailUrl }}
+        source={{ uri: props.item.uri }}
         borderRadius={12}
         style={{
           width: width,
-          height: 200,
-          marginHorizontal: 4,
+          height: 150,
+          margin: 4,
           borderRadius: 12,
         }}
       >
@@ -37,7 +37,7 @@ export default function Slide(props) {
             backgroundColor: "rgba(52, 52, 52, 0.7)",
           }}
         >
-          <Text style={{ color: "white" }}>{props.item.title}</Text>
+          <Text style={{ color: "white" }}>{props.item.text}</Text>
         </View>
       </ImageBackground>
     </View>
