@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 export default function MainScreen({ navigation }) {
   return (
     <NavigationContainer independent={true}>
-      <StatusBar style="auto" backgroundColor={theme.colors.background} />
+      <StatusBar style="light" backgroundColor={theme.colors.primary} />
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
