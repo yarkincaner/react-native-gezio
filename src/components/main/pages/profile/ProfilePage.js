@@ -1,4 +1,4 @@
-import { React, useContext } from "react";
+import { React, useContext, useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Context as AuthContext } from "../../../auth/AuthContext";
@@ -10,7 +10,7 @@ export default function ProfilePage() {
   const { state, logout } = useContext(AuthContext);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.profileHeader}>
         <Image
           source={{ uri: "https://picsum.photos/id/1/200" }}
@@ -26,17 +26,18 @@ export default function ProfilePage() {
         </View>
       </View>
       <View style={styles.content}></View>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 7,
     flexDirection: "column",
   },
   profileHeader: {
-    flex: 3,
+    flex: 4,
+    padding: 4,
     backgroundColor: theme.colors.primary,
     alignItems: "center",
     justifyContent: "center",
@@ -49,7 +50,6 @@ const styles = StyleSheet.create({
   name: {
     color: theme.colors.background,
     fontWeight: "bold",
-    padding: 4,
   },
   location: {
     color: theme.colors.background,

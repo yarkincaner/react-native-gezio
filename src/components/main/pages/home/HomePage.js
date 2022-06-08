@@ -35,7 +35,7 @@ export default function HomePage() {
   //   return <ActivityIndicator size="large" color={theme.colors.primary} />;
   // }
   return (
-    <SafeAreaView>
+    <View>
       <SectionList
         contentContainerStyle={{ padding: 10 }}
         stickySectionHeadersEnabled={false}
@@ -62,7 +62,7 @@ export default function HomePage() {
           return <MainContent item={item} />;
         }}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 

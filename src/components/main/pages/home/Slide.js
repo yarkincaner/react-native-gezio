@@ -37,7 +37,9 @@ export default function Slide(props) {
             backgroundColor: "rgba(52, 52, 52, 0.7)",
           }}
         >
-          <Text style={{ color: "white" }}>{props.item.text}</Text>
+          <Text style={{ color: theme.colors.background }}>
+            {props.item.text}
+          </Text>
         </View>
       </ImageBackground>
     </View>
